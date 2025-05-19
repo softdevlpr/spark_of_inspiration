@@ -1,233 +1,254 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Quote generator</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Delius+Unicase:wght@400;700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <title>Quote Generator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Delius+Unicase:wght@400;700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
     <style>
-      @keyframes fadeIn{
-        from{opacity: 0;}
-        to {opacity: 1;}
+      /* Animations */
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
       }
-      @keyframes pop{
-        0%{ transform: scale(0.9);}
-        50% {transform:  scale(1.1);}
-        100% {transform: scale(1);}
+      @keyframes pop {
+        0% { transform: scale(0.9); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
       }
       @keyframes quoteAppear {
-  0% {
-    opacity: 0;
-    transform: scale(0.8) rotate(-2deg);
-  }
-  50% {
-    transform: scale(1.05) rotate(1deg);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1) rotate(0deg);
-  }
-}
-  @keyframes sparkle{
-    0% {
-    opacity: 0;
-    transform: translateY(0) scale(0.8);
-  }
-  50% {
-    opacity: 1;
-    transform: translateY(-10px) scale(1);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(-20px) scale(1.2);
-  }
-  }
+        0% {
+          opacity: 0;
+          transform: scale(0.8) rotate(-2deg);
+        }
+        50% {
+          transform: scale(1.05) rotate(1deg);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1) rotate(0deg);
+        }
+      }
+      @keyframes sparkle {
+        0% {
+          opacity: 0;
+          transform: translateY(0) scale(0.8);
+        }
+        50% {
+          opacity: 1;
+          transform: translateY(-10px) scale(1);
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(-20px) scale(1.2);
+        }
+      }
 
-.quote-active {
-  animation: quoteAppear 0.7s ease forwards;
-  background: linear-gradient(135deg, #ffe0f0, #f0fff0);
-  border: 2px dashed #ffc0cb;
-  box-shadow: 0 0 15px rgba(255,182,193,0.5);
-  color: #3d3d3d;
-  font-weight: 700;
-  position: relative;
-  transition: all 0.5s ease;
-}
-  #output::before,
-#output::after {
-  content: "✨";
-  position: absolute;
-  font-size: 25px;
-  animation: sparkle 2s infinite;
-  opacity: 0;
-}
-#output::before {
-  left: 10px;
-  top: -15px;
-  animation-delay: 0.3s;
-}
-#output::after {
-  right: 10px;
-  bottom: -15px;
-  animation-delay: 0.6s;
-}
+      /* Reset and base styles */
+      * {
+        box-sizing: border-box;
+      }
 
-      body{
+      body {
+        margin: 0;
+        background: linear-gradient(to right, #fbc2eb, #a6c1ee);
+        font-family: "Montserrat", sans-serif;
         display: flex;
-        flex-direction: column;
         justify-content: center;
         align-items: center;
-        background: linear-gradient(to right, #fbc2eb, #a6c1ee);
-        
-        
+        min-height: 100vh;
+        padding: 20px;
       }
-      button{
-        width: 300px;
-        height: 50px;
-        background-color: rgb(244, 186, 206);
-        font-family: cursive;
-        font-size: 25px;
-        display: block;
-        margin: 10px auto;
-        margin-bottom: 30px;
-        letter-spacing: 1.5px;
-        border-radius: 12px;
-        border: none;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        transition: all 0.3s ease;
-    
+
+      #container {
+        width: 90vw;
+        max-width: 480px;
+        background: rgba(255 255 255 / 0.35);
+        border-radius: 18px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        backdrop-filter: blur(8px);
+        padding: 25px 30px;
+        text-align: center;
       }
-      button:active{
-        animation: pop 0.2s ease;
-      }
-      button:hover{
-        background-color: rgb(255,149,192);
-        transform: scale(1.05);
-        cursor: pointer;
-        transition: all 0.3s ease ;
-      }
-      .heading{
-        font-size: 50px;
+
+      .heading {
         font-family: "Delius Unicase", cursive;
         font-weight: 700;
-        text-align: center;
-        margin-top: 30px;
+        font-size: clamp(2rem, 5vw, 2.8rem);
+        margin: 0 0 15px;
         color: #333;
-        text-shadow: 1px 1px 5px rgba(255, 255, 255, 0.6);
-        
+        text-shadow: 1px 1px 6px rgba(255 255 255 / 0.6);
       }
-      .desc{
-        text-align: center;
-        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-        font-size: 20px;
+
+      .desc {
+        font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
         font-style: oblique;
-        font-weight: bold;
-        margin: 50px;
-        font-size: 25px;
-        margin-bottom: 50px;
+        font-weight: 700;
+        font-size: clamp(1rem, 3vw, 1.4rem);
+        margin: 0 0 30px;
         text-transform: uppercase;
-        
+        color: #555;
       }
-        #output{
-        width: 90%;
-        min-height: 100px;
-          min-width: 50px;
-          margin: 20px auto 0 auto;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        font-family: "Montserrat", sans-serif;
-        font-optical-sizing: auto;
-        font-weight: 500 ;
+
+      button {
+        width: 80%;
+        max-width: 320px;
+        height: 52px;
+        font-family: cursive;
+        font-size: clamp(1.2rem, 3vw, 1.6rem);
+        background-color: rgb(244, 186, 206);
+        border-radius: 14px;
+        border: none;
+        box-shadow: 0 5px 14px rgba(255 149 192 / 0.6);
+        cursor: pointer;
+        letter-spacing: 1.6px;
+        margin: 0 auto 32px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        user-select: none;
+      }
+      button:hover {
+        background-color: rgb(255, 149, 192);
+        transform: scale(1.05);
+      }
+      button:active {
+        animation: pop 0.2s ease;
+      }
+
+      #output {
+        min-height: 130px; /* fixed height for uniformity */
+        padding: 20px 30px;
+        font-weight: 600;
+        font-size: clamp(1.1rem, 3vw, 1.4rem);
+        line-height: 1.5;
         font-style: normal;
+        background-color: #c3d6ae;
+        border-radius: 16px;
+        border: 2.5px solid #97a868;
+        color: #2d3a12;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
         text-align: center;
-        margin-top: 200px;
-        font-size: 22px;
-        background-color: #C3D6AE;
-        padding: 20px;
-        border: solid;
-        border-radius: 15px;
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        display: flex;
+        justify-content: center;
+        align-items: center;
         animation: fadeIn 0.5s ease;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        position: relative;
+        margin-top: 0;
+        transition: all 0.4s ease;
+        word-wrap: break-word;
+        white-space: normal;
+      }
+
+      /* Quote effect */
+      .quote-active {
+        animation: quoteAppear 0.7s ease forwards;
+        background: linear-gradient(135deg, #e8f7d4, #d1f2cc);
+        border-color: #a6d785;
+        box-shadow: 0 0 20px rgba(166, 215, 133, 0.6);
+        color: #2a3a10;
+        font-weight: 700;
+        position: relative;
+      }
+
+      #output::before,
+      #output::after {
+        content: "✨";
+        position: absolute;
+        font-size: 24px;
+        animation: sparkle 2.5s infinite;
+        opacity: 0;
+        user-select: none;
+      }
+      #output::before {
+        left: 12px;
+        top: -18px;
+        animation-delay: 0.3s;
+      }
+      #output::after {
+        right: 12px;
+        bottom: -18px;
+        animation-delay: 0.9s;
+      }
+
+      /* Responsive tweaks */
+      @media (max-width: 420px) {
+        .heading {
+          font-size: 1.9rem;
         }
-        #container{
-          width: 800px;
-          height: 400px;
-          text-align: center;
-          padding: 20px;
-          margin: 0 auto;
-          background-color: rgba(255,255,255,0.3);
-          border-radius: 15px;
-          box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-          backdrop-filter: blur(5px);
-          
+        .desc {
+          font-size: 1.15rem;
+          margin-bottom: 22px;
         }
+        button {
+          height: 48px;
+        }
+        #output {
+          font-size: 1rem;
+          min-height: 110px;
+          padding: 16px 22px;
+        }
+      }
     </style>
   </head>
   <body>
     <div id="container">
       <p class="heading">Spark Of Inspiration</p>
-    <p class="desc">Click the below button to get a quote! Just for you.</p>
+      <p class="desc">Click the below button to get a quote! Just for you.</p>
 
-    <button onclick="
-    pickQuote()
-    ">Generate quote</button>
-    <p id="output"></p>
+      <button onclick="pickQuote()">Generate quote</button>
+      <p id="output"></p>
     </div>
-    
+
     <script>
-      function pickQuote()
-      {
-        const randomNumber = Math.floor(Math.random() * 10); 
-        let quote = ''
-      switch(randomNumber)
-      {
-        case 0:
-          quote = "A negative mind will never give you a positive life."
-          break;
-        case 1:
-          quote = "There is no 'right time', there is just time and what you choose to do with it."
-          break;
-        case 2:
-            quote = "Your direction is more important than your speed."
+      function pickQuote() {
+        const randomNumber = Math.floor(Math.random() * 10);
+        let quote = "";
+        switch (randomNumber) {
+          case 0:
+            quote = "A negative mind will never give you a positive life.";
             break;
-        case 3:
-          quote = "Everything comes to you at the right time."
-          break;
-        case 4:
-          quote = "Life is way too short to spend another day at war with yourself."
-          break;
-        case 5:
-          quote = "Good things are coming."
-          break;
-        case 6: 
-          quote = "Slow progress is better than no progress."
-          break;
-        case 7:
-          quote = "Life isn't about finding yourself, it's about creating yourself."
-          break;
-        case 8: 
-          quote = "Change is scary but change is growth."
-          break;
-        case 9:
-          quote = "Sometimes a change of perspective is all it takes to see the light."
-          break;
-        
+          case 1:
+            quote =
+              "There is no 'right time', there is just time and what you choose to do with it.";
+            break;
+          case 2:
+            quote = "Your direction is more important than your speed.";
+            break;
+          case 3:
+            quote = "Everything comes to you at the right time.";
+            break;
+          case 4:
+            quote = "Life is way too short to spend another day at war with yourself.";
+            break;
+          case 5:
+            quote = "Good things are coming.";
+            break;
+          case 6:
+            quote = "Slow progress is better than no progress.";
+            break;
+          case 7:
+            quote = "Life isn't about finding yourself, it's about creating yourself.";
+            break;
+          case 8:
+            quote = "Change is scary but change is growth.";
+            break;
+          case 9:
+            quote = "Sometimes a change of perspective is all it takes to see the light.";
+            break;
+        }
+
+        const outputEl = document.getElementById("output");
+
+        // reset animation to replay it
+        outputEl.classList.remove("quote-active");
+        void outputEl.offsetWidth; // trigger reflow
+
+        outputEl.innerText = `“${quote}”`;
+        outputEl.classList.add("quote-active");
       }
-            
-
-      const outputEl = document.getElementById("output");
-
-  outputEl.classList.remove("quote-active"); 
-  void outputEl.offsetWidth; 
-
-  outputEl.innerText = `“${quote}”`; 
-  outputEl.classList.add("quote-active");
-      
-
-    }
     </script>
   </body>
 </html>
