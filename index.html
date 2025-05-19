@@ -10,7 +10,6 @@
       rel="stylesheet"
     />
     <style>
-      /* Animations */
       @keyframes fadeIn {
         from { opacity: 0; }
         to { opacity: 1; }
@@ -48,7 +47,6 @@
         }
       }
 
-      /* Reset and base styles */
       * {
         box-sizing: border-box;
       }
@@ -119,7 +117,7 @@
       }
 
       #output {
-        min-height: 130px; /* fixed height for uniformity */
+        min-height: 130px; 
         padding: 20px 30px;
         font-weight: 600;
         font-size: clamp(1.1rem, 3vw, 1.4rem);
@@ -142,7 +140,6 @@
         white-space: normal;
       }
 
-      /* Quote effect */
       .quote-active {
         animation: quoteAppear 0.7s ease forwards;
         background: linear-gradient(135deg, #e8f7d4, #d1f2cc);
@@ -173,7 +170,6 @@
         animation-delay: 0.9s;
       }
 
-      /* Responsive tweaks */
       @media (max-width: 420px) {
         .heading {
           font-size: 1.9rem;
@@ -242,9 +238,8 @@
 
         const outputEl = document.getElementById("output");
 
-        // reset animation to replay it
         outputEl.classList.remove("quote-active");
-        void outputEl.offsetWidth; // trigger reflow
+        void outputEl.offsetWidth; 
 
         outputEl.innerText = `“${quote}”`;
         outputEl.classList.add("quote-active");
