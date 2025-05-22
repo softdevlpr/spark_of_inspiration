@@ -193,7 +193,7 @@
       <p class="heading">Spark Of Inspiration</p>
       <p class="desc">Click the below button to get a quote! Just for you.</p>
 
-      <button onclick="pickQuote()">Generate quote</button>
+      <button class ="js-generate-quote-button">Generate quote</button>
       <p id="output"></p>
     </div>
 
@@ -243,6 +243,17 @@
         outputEl.innerText = `“${quote}”`;
         outputEl.classList.add("quote-active");
       }
+
+      document.querySelector('.js-generate-quote-button')
+        .addEventListener('click', () => {
+          pickQuote();
+      });
+
+      document.querySelector('body').addEventListener('keydown', (event) => {
+        if(event.key === 'Enter'){
+          pickQuote();
+        }
+      });
     </script>
   </body>
 </html>
