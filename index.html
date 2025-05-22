@@ -249,8 +249,10 @@
           pickQuote();
       });
 
-      document.querySelector('body').addEventListener('keydown', () => {
-        pickQuote();
+      document.querySelector('body').addEventListener('keydown', (event) => {
+        if(event.key === 'Enter'){
+          pickQuote();
+        }
       });
     </script>
   </body>
